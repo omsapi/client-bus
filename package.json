@@ -1,0 +1,8 @@
+{
+  "name": "application-name",
+  "version": "0.0.1",
+  "dependencies": {
+    "q": "^1.4.1",
+    "shortid": "^2.2.6"
+  }
+}
