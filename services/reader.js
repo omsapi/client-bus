@@ -34,10 +34,15 @@ Reader.prototype.listen = function (topic, channel, callback) {
     var self = this;
     this._deffered.promise
         .then(function (message) {
-            message.send('get-data', self._clienId, topic, channel, function (err, response) {
-                message.send('ack', self._clienId, function (err) {
-                    callback(err, response);
-                });
+            message.listen('new-message', function (data, next) {
+                next();
+                callback(null, data);
+            });
+
+            message.send('create-channel', self._clienId, topic, channel, function (err) {
+                if (err) {
+                    callback(err);
+                }
             });
         })
         .catch(function (err) {
