@@ -18,15 +18,31 @@ var msg = {
 writer.connect();
 reader.connect();
 
-for (var i = 0; i < 3; i++) {
-    writer.send('topic1', msg, function (err) {
-        if (err) {
-            return console.log(err);
-        }
+writer.send('topic1', msg, function (err) {
+    if (err) {
+        return console.log(err);
+    }
 
-        console.log('Msg sent!');
-    });
-}
+    console.log('Msg sent!');
+});
+
+//for (var i = 0; i < 5; i++) {
+//    setTimeout((function (i) {
+//        var msg = {
+//            name: 'kostuyn',
+//            body: i
+//        };
+//        return function () {
+//            writer.send('topic1', msg, function (err) {
+//                if (err) {
+//                    return console.log(err);
+//                }
+//
+//                console.log('Msg sent!');
+//            });
+//        };
+//    })(i), 1000)
+//}
 
 
 reader.listen('topic1', 'channel1', function (err, message) {
@@ -36,3 +52,19 @@ reader.listen('topic1', 'channel1', function (err, message) {
 
     console.log(message);
 });
+
+//var Q = require('q');
+//var deffered = Q.defer();
+//var promise = deffered.promise;
+//
+//promise.then(function (val) {
+//    console.log(val);
+//});
+//
+//promise.then(function (val) {
+//    console.log(val);
+//});
+//
+//deffered.resolve(1);
+//deffered.resolve(2);
+
