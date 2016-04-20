@@ -34,11 +34,6 @@ Reader.prototype.listen = function (topic, channel, callback) {
     var self = this;
     this._deffered.promise
         .then(function (message) {
-            //message.listen('new-message', function (data, next) {
-            //    next();
-            //    callback(null, data);
-            //});
-
             message.send('create-channel', self._clienId, topic, channel, function (err) {
                 if (err) {
                     return callback(err);

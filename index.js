@@ -44,7 +44,6 @@ for (var i = 0; i < 5; i++) {
     })(i), 1000)
 }
 
-
 reader.listen('topic1', 'channel1', function (err, message) {
     if (err) {
         return console.log(err);
@@ -53,18 +52,4 @@ reader.listen('topic1', 'channel1', function (err, message) {
     console.log(message);
 });
 
-//var Q = require('q');
-//var deffered = Q.defer();
-//var promise = deffered.promise;
-//
-//promise.then(function (val) {
-//    console.log(val);
-//});
-//
-//promise.then(function (val) {
-//    console.log(val);
-//});
-//
-//deffered.resolve(1);
-//deffered.resolve(2);
 
