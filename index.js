@@ -49,6 +49,18 @@ reader.listen('topic1', 'channel1', function (err, message) {
         return console.log(err);
     }
 
+    message.finish(function(err){
+        if (err) {
+            return console.log(err);
+        }
+
+        console.log('FINISH OK!');
+    });
+
+    //setTimeout(function(){
+    //    message.finish();
+    //}, 1000);
+    console.log('LISTEN:');
     console.log(message);
 });
 

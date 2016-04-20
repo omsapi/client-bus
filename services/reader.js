@@ -39,14 +39,23 @@ Reader.prototype.listen = function (topic, channel, callback) {
                     return callback(err);
                 }
 
-                function getMsg(){
+                function getMsg() {
                     console.log('get-message');
-                    message.send('get-message', self._clienId, topic, channel, function (err, data) {
+                    message.send('get-message', self._clienId, topic, channel, function (err, msg) {
                         if (err) {
                             return callback(err);
                         }
 
-                        callback(null, data);
+                        var msgObj = {
+                            data: msg,
+                            finish: function (cb) {
+                                message.send('finish-message', self._clienId, topic, channel, msg.id, function (err) {
+                                    cb(err);
+                                });
+                            }
+                        };
+
+                        callback(null, msgObj);
                         getMsg();
                     });
                 }
