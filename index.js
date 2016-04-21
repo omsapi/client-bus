@@ -64,4 +64,25 @@ reader.listen('topic1', 'channel1', function (err, message) {
     console.log(message);
 });
 
+//###########################
+
+// TODO: reader.send('topic1', ..) reader.listen('topic1', ..) - TWICE - ?????
+writer.send('topic2', 'Message without finish.', function (err) {
+    if (err) {
+        return console.log(err);
+    }
+
+    console.log('Msg sent!');
+});
+
+reader.listen('topic2', 'channel1', function (err, message) {
+    if (err) {
+        return console.log(err);
+    }
+
+    console.log('LISTEN:');
+    console.log(message);
+});
+
+
 
